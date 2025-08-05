@@ -463,8 +463,12 @@ h6 {
     display: none;
     list-style: none;
     position: absolute;
-    inset: 60px 20px 20px 20px;
-    padding: 10px 0;
+    top: 60px;
+    left: 20px;
+    right: 20px;
+    /* Remove bottom inset to avoid full-height box */
+    /* Set height based on content + 20px */
+    padding: 10px 0 20px;
     margin: 0;
     border-radius: 6px;
     background-color: var(--nav-mobile-background-color);
@@ -924,6 +928,46 @@ section,
   }
 }
 
+.section-title2 {
+  /* padding-bottom: 10px; */
+  position: relative;
+}
+
+.section-title2 h2 {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0;
+  line-height: 1px;
+  margin: 0;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.section-title2 h2::after {
+  content: "";
+  width: 120px;
+  height: 1px;
+  display: inline-block;
+  background: var(--accent-color);
+  margin: 4px 10px;
+}
+
+.section-title2 p {
+  color: var(--heading-color);
+  margin: 0;
+  font-size: 36px;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-family: var(--heading-font);
+}
+
+@media (max-width: 768px) {
+  .section-title2 p {
+    font-size: 24px;
+  }
+}
+
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
@@ -1152,6 +1196,7 @@ section,
 }
 
 .services .details h3 {
+  color: var(--default-color2);
   font-weight: 700;
   margin: 10px 0 15px 0;
   font-size: 22px;
@@ -1209,7 +1254,7 @@ section,
 }
 
 .clients .client-logo img {
-  padding: 20px 40px;
+  padding: 0px 40px;
   max-width: 90%;
   transition: 0.3s;
   opacity: 0.5;
@@ -1226,6 +1271,78 @@ section,
     padding: 20px;
   }
 }
+
+
+.client-slider-wrapper {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.client-slider {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.client-slide-track {
+  display: flex;
+  width: calc(200%); /* Because logos are duplicated */
+  animation: scroll-logos 40s linear infinite;
+}
+
+.client-slide-track .client-logo {
+  flex: 0 0 auto;
+  width: 200px; /* Adjust per logo size */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.client-slide-track .client-logo img {
+  max-width: 100%;
+  height: auto;
+  filter: grayscale(100%);
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.client-slide-track .client-logo img:hover {
+  filter: none;
+  opacity: 1;
+}
+
+/* Animation */
+@keyframes scroll-logos {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Mobile: show 1 logo at a time and adjust animation */
+@media (max-width: 640px) {
+  .client-slide-track {
+    animation: scroll-logos-mobile 20s linear infinite;
+  }
+
+  .client-slide-track .client-logo {
+    width: 50vw;
+  }
+
+  @keyframes scroll-logos-mobile {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+}
+
 
 /*--------------------------------------------------------------
 # Features Section
@@ -1366,9 +1483,10 @@ section,
 # Testimonials Section
 --------------------------------------------------------------*/
 .testimonials {
-  padding: 80px 0;
+  padding: 30px 0;
   position: relative;
 }
+
 
 .testimonials:before {
   content: "";
@@ -1676,7 +1794,7 @@ section,
 
 .contact .info-item i {
   font-size: 20px;
-  color: var(--accent-color);
+  color: var(--background-color);
   width: 56px;
   height: 56px;
   font-size: 24px;
@@ -1691,7 +1809,7 @@ section,
 
 .contact .info-item h3 {
   font-size: 20px;
-  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  color: color-mix(in srgb, var(--background-color), transparent 20%);
   font-size: 18px;
   font-weight: 700;
   margin: 10px 0;
@@ -1701,6 +1819,7 @@ section,
   padding: 0;
   margin-bottom: 0;
   font-size: 14px;
+  color: color-mix(in srgb, var(--background-color), transparent 30%);
 }
 
 .contact .php-email-form {
@@ -1724,7 +1843,7 @@ section,
   box-shadow: none;
   border-radius: 0;
   color: var(--default-color);
-  background-color: var(--surface-color);
+  background-color: var(--background-color);
   border-color: color-mix(in srgb, var(--default-color), transparent 80%);
 }
 
@@ -1742,7 +1861,7 @@ section,
 
 .contact .php-email-form button[type=submit] {
   color: var(--contrast-color);
-  background: var(--accent-color);
+  background: var(--background-color);
   border: 0;
   padding: 10px 30px;
   transition: 0.4s;
@@ -1879,4 +1998,58 @@ section,
   font-size: 20px;
   margin-right: 8px;
   color: var(--accent-color);
+}
+
+
+
+
+
+/*** Header ***/
+.carousel-caption {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: rgba(0, 29, 35, .8);
+    z-index: 1;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 15%;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--dark);
+    border: 12px solid var(--dark);
+    border-radius: 3rem;
+}
+
+@media (max-width: 768px) {
+    #header-carousel .carousel-item {
+        position: relative;
+        min-height: 450px;
+    }
+    
+    #header-carousel .carousel-item img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.video-bg {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center top;
+  opacity: 1;
 }

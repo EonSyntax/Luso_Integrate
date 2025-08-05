@@ -207,3 +207,22 @@
   document.addEventListener('scroll', navmenuScrollspy);
 
 })();
+
+
+/**
+   * Navmenu Active switch
+   */
+document.addEventListener("DOMContentLoaded", function () {
+  const navLinks = document.querySelectorAll('#navmenu a');
+
+  const currentPath = window.location.pathname.split("/").pop() || "index.html";
+
+  navLinks.forEach(link => {
+    const linkPath = link.getAttribute("href").split("/").pop();
+
+    if (linkPath === currentPath) {
+      navLinks.forEach(l => l.classList.remove("active")); // Remove existing active classes
+      link.classList.add("active"); // Add active class to the current link
+    }
+  });
+});
