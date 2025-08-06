@@ -1001,13 +1001,18 @@ section,
 .hero-slide .container {
   position: relative;
   z-index: 10;
+  pointer-events: auto; /* Ensure clicks go through */
 }
 
 .hero-slide.active {
   transform: translateX(0);
   opacity: 1;
   pointer-events: auto;
-  z-index: 2;
+  z-index: 5;
+}
+
+.hero-slide:not(.active) {
+  pointer-events: none;
 }
 
 .hero-slide.previous {
@@ -1027,7 +1032,7 @@ section,
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 0;
+  z-index: 1;
   pointer-events: none;
 }
 
@@ -1042,12 +1047,13 @@ section,
   z-index: 1;
 }
 
-.hero:before {
+.hero-slide:before {
   content: "";
   background: rgba(0, 0, 0, 0.6); /* more visible overlay */
   position: absolute;
   inset: 0;
-  z-index: 3;
+  z-index: 2;
+  pointer-events: none;
 }
 
 .hero .container {
