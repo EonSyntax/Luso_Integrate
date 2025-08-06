@@ -226,3 +226,42 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+
+/**
+ * Hero Section animation
+ */
+document.addEventListener("DOMContentLoaded", function () {
+  const slides = document.querySelectorAll(".hero-slide");
+  const nextBtn = document.querySelector(".hero-next");
+  const prevBtn = document.querySelector(".hero-prev");
+  let currentIndex = 0;
+
+  function showSlide(index, direction = "next") {
+    slides.forEach((slide, i) => {
+      slide.classList.remove("active", "previous");
+
+      if (i === currentIndex && direction === "next") {
+          slide.classList.add("previous");
+        } else if (i === currentIndex && direction === "prev") {
+          slide.classList.remove("active");
+      }
+
+      if (i === index) {
+        slide.classList.add("active");
+      }
+    });
+
+    currentIndex = index;
+  }
+
+  nextBtn.addEventListener("click", () => {
+    const nextIndex = (currentIndex + 1) % slides.length;
+    showSlide(nextIndex, "next");
+  });
+
+  prevBtn.addEventListener("click", () => {
+    const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+    showSlide(prevIndex, "prev");
+  });
+  });
