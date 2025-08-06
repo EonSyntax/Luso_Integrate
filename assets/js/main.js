@@ -231,7 +231,7 @@ document.addEventListener("DOMContentLoaded", function () {
 /**
  * Hero Section animation
  */
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   const slides = document.querySelectorAll(".hero-slide");
   const nextBtn = document.querySelector(".hero-next");
   const prevBtn = document.querySelector(".hero-prev");
@@ -239,29 +239,44 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function showSlide(index, direction = "next") {
     slides.forEach((slide, i) => {
-      slide.classList.remove("active", "previous");
+      slide.classList.remove("active", "previous", "next");
 
-      if (i === currentIndex && direction === "next") {
-          slide.classList.add("previous");
-        } else if (i === currentIndex && direction === "prev") {
-          slide.classList.remove("active");
+      if (i === currentIndex) {
+        // mark current slide as exiting
+        slide.classList.add(direction === "next" ? "previous" : "next");
+        slide.style.opacity = "0";
       }
 
       if (i === index) {
         slide.classList.add("active");
+        slide.style.transform = "translateX(0)";
+        slide.style.opacity = "1";
+      } else if (i < index) {
+        slide.style.transform = "translateX(-100%)";
+      } else {
+        slide.style.transform = "translateX(100%)";
       }
     });
 
     currentIndex = index;
   }
 
-  nextBtn.addEventListener("click", () => {
+  nextBtn?.addEventListener("click", () => {
     const nextIndex = (currentIndex + 1) % slides.length;
     showSlide(nextIndex, "next");
   });
 
-  prevBtn.addEventListener("click", () => {
+  prevBtn?.addEventListener("click", () => {
     const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
     showSlide(prevIndex, "prev");
   });
-  });
+
+  // Autoplay every 7s (optional)
+  // setInterval(() => {
+  //   const nextIndex = (currentIndex + 1) % slides.length;
+  //   showSlide(nextIndex, "next");
+  // }, 7000);
+
+  // Initial render
+  showSlide(currentIndex);
+});
