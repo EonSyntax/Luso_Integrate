@@ -488,7 +488,8 @@ h6 {
     font-weight: 500;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 6px;
     white-space: nowrap;
     transition: 0.3s;
   }
@@ -497,9 +498,9 @@ h6 {
   .navmenu a:focus i {
     font-size: 12px;
     line-height: 0;
-    margin-left: 5px;
-    width: 30px;
-    height: 30px;
+    margin-left: 0;
+    width: auto;
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1503,7 +1504,7 @@ section,
   width: 556px !important;
   height: 385px !important;
   object-fit: cover; /* Keeps it looking nice if the aspect ratio doesn't match */
-}
+  }
 }
 
 /*--------------------------------------------------------------
@@ -1542,7 +1543,7 @@ section,
 }
 
 .pricing ul {
-  padding: 20px 0;
+  padding: 1px 0;
   list-style: none;
   color: color-mix(in srgb, var(--default-color), transparent 30%);
   text-align: left;
@@ -1902,6 +1903,27 @@ section,
 --------------------------------------------------------------*/
 .team .member {
   position: relative;
+  margin-bottom: 50px; /* space between rows */
+  padding-bottom: 320px; /* enough space for .member-info to fit */
+}
+
+.member img {
+  width: 366px !important;
+  height: 247px !important;
+  object-fit: cover; /* Keeps it looking nice if the aspect ratio doesn't match */
+}
+
+
+@media (min-width: 992px) {
+  .features .features-item .b {
+    padding-left: 350px; /* adjust to taste */
+  }
+
+  .member img {
+    width: 556px !important;
+    height: 385px !important;
+    object-fit: cover; /* Keeps it looking nice if the aspect ratio doesn't match */
+  }
 }
 
 .team .member .pic {
@@ -1914,9 +1936,24 @@ section,
   color: color-mix(in srgb, var(--default-color), transparent 20%);
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
   position: absolute;
-  bottom: -50px;
-  left: 20px;
-  right: 20px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 15px; /* optional: indent the info a bit */
+  padding: 20px 15px;
+  overflow: hidden;
+  transition: 0.5s;
+}
+
+.team .member .member-info2 {
+  background-color: var(--surface-color);
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 65px 15px; /* optional: indent the info a bit */
   padding: 20px 15px;
   overflow: hidden;
   transition: 0.5s;
@@ -1939,6 +1976,31 @@ section,
   background: color-mix(in srgb, var(--default-color), transparent 60%);
   bottom: 0;
   left: 0;
+}
+
+.team .member ul {
+  list-style: none;
+  padding: 0;
+}
+
+.team .member ul li {
+  padding-bottom: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.team .member ul li:last-child {
+  padding-bottom: 0;
+}
+
+.team .member ul i {
+  font-size: 20px;
+  padding-right: 4px;
+  color: var(--accent-color);
+}
+
+.team .member p:last-child {
+  margin-bottom: 0;
 }
 
 .team .member span {
@@ -2021,6 +2083,7 @@ section,
 
 .contact .php-email-form input[type=text],
 .contact .php-email-form input[type=email],
+.contact .php-email-form select[type=services],
 .contact .php-email-form textarea {
   font-size: 14px;
   padding: 10px 15px;
@@ -2033,12 +2096,14 @@ section,
 
 .contact .php-email-form input[type=text]:focus,
 .contact .php-email-form input[type=email]:focus,
+.contact .php-email-form select[type=services]:focus,
 .contact .php-email-form textarea:focus {
   border-color: var(--accent-color);
 }
 
 .contact .php-email-form input[type=text]::placeholder,
 .contact .php-email-form input[type=email]::placeholder,
+.contact .php-email-form select[type=services]::placeholder,
 .contact .php-email-form textarea::placeholder {
   color: color-mix(in srgb, var(--default-color), transparent 70%);
 }
